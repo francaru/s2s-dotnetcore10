@@ -1,0 +1,81 @@
+name: build-and-test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+env:
+  DOTNET_VERSION: '10.0'
+
+jobs:
+
+  operational-service-tests:
+    name: Operational Service – ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macOS-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore
+        run: dotnet restore src/OperationalService/OperationalService.csproj
+
+      - name: Build
+        run: dotnet build src/OperationalService/OperationalService.csproj --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test tests/OperationalService.Tests/OperationalService.Tests.csproj --configuration Release --collect:"XPlat Code Coverage"
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-operational-service-${{ matrix.os }}
+          path: tests/OperationalService.Tests/TestResults/**/coverage.cobertura.xml
+
+
+  workload-service-tests:
+    name: Workload Service – ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macOS-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore
+        run: dotnet restore src/WorkloadService/WorkloadService.csproj
+
+      - name: Build
+        run: dotnet build src/WorkloadService/WorkloadService.csproj --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test tests/WorkloadService.Tests/WorkloadService.Tests.csproj --configuration Release --collect:"XPlat Code Coverage"
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-workload-service-${{ matrix.os }}
+          path: tests/WorkloadService.Tests/TestResults/**/coverage.cobertura.xml

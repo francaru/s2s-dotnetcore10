@@ -1,0 +1,18 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="docker-compose.yaml" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Solution Items/.github/" />
+  <Folder Name="/Solution Items/.github/workflows/">
+    <File Path=".github/workflows/pull-requests.yml" />
+  </Folder>
+  <Project Path="src/Database/Database.csproj" Id="56607e2a-e261-4a3f-81ce-5fda5da9ff8f" />
+  <Project Path="src/Messaging/Messaging.csproj" Id="10df6c68-6ad2-4c3a-9b94-f0fed571ab64" />
+  <Project Path="src/OperationalService/OperationalService.csproj" Id="fb2102a9-566a-4453-9747-612796cf96fd" />
+  <Project Path="src/WorkloadService/WorkloadService.csproj" Id="64fbc717-02a0-4740-ac5e-cc3d8ac77c4f" />
+  <Project Path="tests/OperationalService.Tests/OperationalService.Tests.csproj" Id="831e2060-ee62-42c7-b035-027f530473f9" />
+  <Project Path="tests/WorkloadService.Tests/WorkloadService.Tests.csproj" Id="16dd1c70-db08-495c-b163-285a16f1fcd9" />
+</Solution>

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Architecture Diagram: Francesco Caruana – MeDirect Assessment Test -->
+
+<svg
+   width="900"
+   height="520"
+   viewBox="0 0 900 520"
+   version="1.1"
+   id="svg17"
+   sodipodi:docname="architecture.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview17"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="1.4865385"
+     inkscape:cx="450.03881"
+     inkscape:cy="260"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="2391"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg17" />
+  <style
+     id="style1">
+    .box { fill: #f9fafb; stroke: #1f2937; stroke-width: 1.5; rx: 10; }
+    .service { fill: #e0f2fe; }
+    .infra { fill: #ecfeff; }
+    .obs { fill: #fef3c7; }
+    .title { font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: bold; fill: #111827; }
+    .text { font-family: Arial, Helvetica, sans-serif; font-size: 12px; fill: #1f2937; }
+    .arrow { stroke: #111827; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+  </style>
+  <defs
+     id="defs1">
+    <marker
+       id="arrowhead"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0 0, 10 3.5, 0 7"
+         fill="#111827"
+         id="polygon1" />
+    </marker>
+    <marker
+       id="arrowhead-9"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="10,3.5 0,7 0,0 "
+         fill="#111827"
+         id="polygon1-4" />
+    </marker>
+    <marker
+       id="arrowhead-4"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="10,3.5 0,7 0,0 "
+         fill="#111827"
+         id="polygon1-5" />
+    </marker>
+    <marker
+       id="arrowhead-4-1"
+       markerWidth="10"
+       markerHeight="7"
+       refX="9"
+       refY="3.5"
+       orient="auto">
+      <polygon
+         points="0,7 0,0 10,3.5 "
+         fill="#111827"
+         id="polygon1-5-1" />
+    </marker>
+  </defs>
+  <!-- Operational Service -->
+  <rect
+     x="60"
+     y="80"
+     width="260"
+     height="140"
+     class="box service"
+     id="rect1" />
+  <text
+     x="190"
+     y="105"
+     text-anchor="middle"
+     class="title"
+     id="text1">OperationalService</text>
+  <text
+     x="190"
+     y="130"
+     text-anchor="middle"
+     class="text"
+     id="text2">ASP.NET Core REST API</text>
+  <text
+     x="190"
+     y="150"
+     text-anchor="middle"
+     class="text"
+     id="text3">Job Management</text>
+  <text
+     x="190"
+     y="170"
+     text-anchor="middle"
+     class="text"
+     id="text4">OpenTelemetry Tracing</text>
+  <!-- Database -->
+  <rect
+     x="60"
+     y="260"
+     width="260"
+     height="100"
+     class="box infra"
+     id="rect4" />
+  <text
+     x="190"
+     y="290"
+     text-anchor="middle"
+     class="title"
+     id="text5">PostgreSQL</text>
+  <text
+     x="190"
+     y="310"
+     text-anchor="middle"
+     class="text"
+     id="text6">Job Persistence</text>
+  <!-- RabbitMQ -->
+  <rect
+     x="397.55731"
+     y="81.761688"
+     width="129.10272"
+     height="100.2282"
+     class="box infra"
+     id="rect6" />
+  <text
+     x="462.78137"
+     y="126.29366"
+     text-anchor="middle"
+     class="title"
+     id="text7">RabbitMQ</text>
+  <text
+     x="462.78137"
+     y="146.29367"
+     text-anchor="middle"
+     class="text"
+     id="text8">Async Messaging</text>
+  <!-- Workload Service -->
+  <rect
+     x="608.25354"
+     y="81.345406"
+     width="260"
+     height="140"
+     class="box service"
+     id="rect8" />
+  <text
+     x="738.25354"
+     y="106.34541"
+     text-anchor="middle"
+     class="title"
+     id="text9">WorkloadService</text>
+  <text
+     x="738.25354"
+     y="131.34541"
+     text-anchor="middle"
+     class="text"
+     id="text10">.NET Console App</text>
+  <text
+     x="738.25354"
+     y="151.34541"
+     text-anchor="middle"
+     class="text"
+     id="text11">Job Execution</text>
+  <text
+     x="738.25354"
+     y="171.34541"
+     text-anchor="middle"
+     class="text"
+     id="text12">Background Processing</text>
+  <!-- Jaeger -->
+  <rect
+     x="608.92627"
+     y="260.31046"
+     width="260"
+     height="100"
+     class="box obs"
+     id="rect12" />
+  <text
+     x="738.92627"
+     y="290.31046"
+     text-anchor="middle"
+     class="title"
+     id="text13">Jaeger</text>
+  <text
+     x="738.92627"
+     y="310.31046"
+     text-anchor="middle"
+     class="text"
+     id="text14">Distributed Tracing UI</text>
+  <!-- Arrows -->
+  <!-- OperationalService -> PostgreSQL -->
+  <line
+     x1="190"
+     y1="220"
+     x2="190"
+     y2="260"
+     class="arrow"
+     id="line14" />
+  <!-- OperationalService -> RabbitMQ -->
+  <!-- RabbitMQ -> WorkloadService -->
+  <line
+     x1="526.77148"
+     y1="121.22118"
+     x2="607.19446"
+     y2="120.59589"
+     class="arrow"
+     id="line16" />
+  <line
+     x1="609.37097"
+     y1="155.6142"
+     x2="528.94556"
+     y2="155.67189"
+     class="arrow"
+     id="line16-1"
+     style="fill:none;stroke:#111827;stroke-width:1.63627;marker-end:url(#arrowhead-4)" />
+  <line
+     x1="398.50378"
+     y1="158.67944"
+     x2="320.79437"
+     y2="158.73758"
+     class="arrow"
+     id="line16-1-2"
+     style="fill:none;stroke:#111827;stroke-width:1.61437;marker-end:url(#arrowhead-4-1)" />
+  <line
+     x1="320.45526"
+     y1="121.11926"
+     x2="394.78082"
+     y2="120.48393"
+     class="arrow"
+     id="line16-8"
+     style="fill:none;stroke:#111827;stroke-width:1.58559;marker-end:url(#arrowhead-9)" />
+  <!-- OperationalService -> Jaeger -->
+  <line
+     x1="319.94974"
+     y1="180.00438"
+     x2="606.86273"
+     y2="312.51953"
+     class="arrow"
+     id="line17" />
+</svg>
