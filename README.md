@@ -1,4 +1,4 @@
-# Service to Service - DotNETC Core 10
+# Service to Service - DotNET Core 10
 
 The goal of this project is to demonstrate my approach to backend service design, containerization, inter-service communication, observability, and database management using modern .NET and cloud-native patterns.
 
