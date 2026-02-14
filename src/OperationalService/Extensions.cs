@@ -1,6 +1,7 @@
 ﻿using Database;
 using Messaging;
-using Messaging.LifecycleEvents;
+using Messaging.JobLifecyleEvents;
+using Messaging.WorkerLifecycleEvents;
 using OperationalService.BusinessLogic.Services;
 using System.Diagnostics;
 
@@ -26,6 +27,17 @@ public static class Extensions
             onQueue: onStatusChangeQueue,
             (DatabaseContext dbContext, ActivitySource activitySource, ILoggerFactory loggerFactory, MQEventInfo eventInfo, JobStatusChangeEventBody? eventBody) => {
                 new JobsService(dbContext, mqClient).OnStatusChange(activitySource, loggerFactory, eventInfo, eventBody);
+            }
+        );
+
+        /// 1. Create a queue for the specified queue name.
+        /// 2. Create a consumer that listens for events on the specified queue name.
+        var onWorkerStartQueue = $"{mqClient.ServiceName}.BusinessLogic.Service.WorkersService::OnWorkerStart";
+        mqClient.CreateQueue(queueName: onWorkerStartQueue);
+        mqClient.Consume(
+            onQueue: onWorkerStartQueue,
+            (DatabaseContext dbContext, ActivitySource activitySource, ILoggerFactory loggerFactory, MQEventInfo eventInfo, WorkerStartEventBody? eventBody) => {
+                new WorkersService(dbContext, mqClient).OnWorkerStart(activitySource, loggerFactory, eventInfo, eventBody);
             }
         );
 

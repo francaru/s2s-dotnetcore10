@@ -1,6 +1,6 @@
 ﻿using Database;
 using Messaging;
-using Messaging.WorkEvents;
+using Messaging.JobLifecyleEvents;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 

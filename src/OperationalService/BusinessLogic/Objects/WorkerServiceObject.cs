@@ -1,22 +1,22 @@
 ﻿namespace OperationalService.BusinessLogic.Objects;
 
 /// <summary>
-/// A service object for storing information on a job.
+/// A service object for storing information on a worker.
 /// </summary>
-public sealed class JobServiceObject
-{   
+public sealed class WorkerServiceObject
+{
     /// <summary>
-    /// The unique identifier of the job.
+    /// The unique identifier of the worker.
     /// </summary>
     public Guid Id { get; set; }
 
     /// <summary>
-    /// The name of the job.
+    /// The name of the worker.
     /// </summary>
     public required string Name { get; set; }
 
     /// <summary>
-    /// The status of the job.
+    /// The status of the worker.
     /// </summary>
     public string? Status { get; set; }
 }

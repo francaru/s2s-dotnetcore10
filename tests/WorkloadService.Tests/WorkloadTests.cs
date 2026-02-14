@@ -1,6 +1,5 @@
 ﻿using Messaging;
-using Messaging.LifecycleEvents;
-using Messaging.WorkEvents;
+using Messaging.JobLifecyleEvents;
 using Moq;
 using System.Text.Json;
 using System.Text.Json.Nodes;

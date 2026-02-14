@@ -57,13 +57,13 @@ services:
     ports:
       - "5000:8080"
 
-  workloadservice:
-    image: workload-service:latest
-    build:
-      context: .
-      dockerfile: src/WorkloadService/Dockerfile
-    container_name: workloadservice
-    command: --rabbitmq-host rabbitmq
-    depends_on:
-      rabbitmq:
-        condition: service_healthy
+  # workloadservice:
+  #   image: workload-service:latest
+  #   build:
+  #     context: .
+  #     dockerfile: src/WorkloadService/Dockerfile
+  #   container_name: workloadservice
+  #   command: --rabbitmq-host rabbitmq
+  #   depends_on:
+  #     rabbitmq:
+  #       condition: service_healthy

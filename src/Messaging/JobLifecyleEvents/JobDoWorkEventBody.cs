@@ -1,4 +1,4 @@
-﻿namespace Messaging.WorkEvents;
+﻿namespace Messaging.JobLifecyleEvents;
 
 /// <summary>
 /// Describes an event where a job is requested to do work.

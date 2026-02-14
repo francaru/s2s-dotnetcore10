@@ -11,6 +11,11 @@ public sealed class JobEntity
     public required Guid Id { get; set; }
 
     /// <summary>
+    /// The unique ID of the worker handling the job.
+    /// </summary>
+    public required Guid WorkerId { get; set; }
+
+    /// <summary>
     /// The name of the job.
     /// </summary>
     public required string Name { get; set; }
@@ -19,4 +24,9 @@ public sealed class JobEntity
     /// The JobInfo instance that links to this job object.
     /// </summary>
     public JobInfoEntity? JobInfo { get; set; }
+
+    /// <summary>
+    /// The Worker instance that links to the this job object.
+    /// </summary>
+    public WorkerEntity? Worker { get; set; }
 }

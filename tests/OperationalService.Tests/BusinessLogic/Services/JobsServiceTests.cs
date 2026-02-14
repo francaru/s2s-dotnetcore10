@@ -1,6 +1,6 @@
 ﻿using Database.Entities;
 using Messaging;
-using Messaging.LifecycleEvents;
+using Messaging.JobLifecyleEvents;
 using Microsoft.Extensions.Logging;
 using Moq;
 using OperationalService.BusinessLogic.Services;
@@ -43,6 +43,7 @@ public class JobsServiceTests
                 {
                     Id = jobId,
                     Name = jobId.ToString(),
+                    WorkerId = Guid.NewGuid(),
                     JobInfo = new JobInfoEntity
                     {
                         JobId = jobId,
@@ -71,6 +72,7 @@ public class JobsServiceTests
                 {
                     Id = jobId,
                     Name = jobId.ToString(),
+                    WorkerId = Guid.NewGuid(),
                     JobInfo = new JobInfoEntity
                     {
                         JobId = jobId,
@@ -108,6 +110,7 @@ public class JobsServiceTests
             {
                 Id = jobId,
                 Name = jobId.ToString(),
+                WorkerId = Guid.NewGuid(),
                 JobInfo = new JobInfoEntity
                 {
                     JobId = jobId,
@@ -135,6 +138,7 @@ public class JobsServiceTests
             {
                 Id = jobId,
                 Name = jobId.ToString(),
+                WorkerId = Guid.NewGuid(),
                 JobInfo = new JobInfoEntity
                 {
                     JobId = jobId,

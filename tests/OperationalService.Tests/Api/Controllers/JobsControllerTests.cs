@@ -43,6 +43,7 @@ public class JobsControllerTests
                 {
                     Id = jobId,
                     Name = jobId.ToString(),
+                    WorkerId = Guid.NewGuid(),
                     JobInfo = new JobInfoEntity
                     {
                         JobId = jobId,
@@ -98,6 +99,7 @@ public class JobsControllerTests
             {
                 Id = jobId,
                 Name = jobId.ToString(),
+                WorkerId = Guid.NewGuid(),
                 JobInfo = new JobInfoEntity
                 {
                     JobId = jobId,

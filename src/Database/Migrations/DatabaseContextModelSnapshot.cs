@@ -32,7 +32,12 @@ namespace Database.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("WorkerId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("WorkerId");
 
                     b.ToTable("Jobs");
                 });
@@ -50,6 +55,45 @@ namespace Database.Migrations
                     b.ToTable("JobInfos");
                 });
 
+            modelBuilder.Entity("Database.Entities.WorkerEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Workers");
+                });
+
+            modelBuilder.Entity("Database.Entities.WorkerInfoEntity", b =>
+                {
+                    b.Property<Guid>("WorkerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("text");
+
+                    b.HasKey("WorkerId");
+
+                    b.ToTable("WorkerInfos");
+                });
+
+            modelBuilder.Entity("Database.Entities.JobEntity", b =>
+                {
+                    b.HasOne("Database.Entities.WorkerEntity", "Worker")
+                        .WithMany("Jobs")
+                        .HasForeignKey("WorkerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Worker");
+                });
+
             modelBuilder.Entity("Database.Entities.JobInfoEntity", b =>
                 {
                     b.HasOne("Database.Entities.JobEntity", "Job")
@@ -61,9 +105,27 @@ namespace Database.Migrations
                     b.Navigation("Job");
                 });
 
+            modelBuilder.Entity("Database.Entities.WorkerInfoEntity", b =>
+                {
+                    b.HasOne("Database.Entities.WorkerEntity", "Worker")
+                        .WithOne("WorkerInfo")
+                        .HasForeignKey("Database.Entities.WorkerInfoEntity", "WorkerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Worker");
+                });
+
             modelBuilder.Entity("Database.Entities.JobEntity", b =>
                 {
                     b.Navigation("JobInfo");
+                });
+
+            modelBuilder.Entity("Database.Entities.WorkerEntity", b =>
+                {
+                    b.Navigation("Jobs");
+
+                    b.Navigation("WorkerInfo");
                 });
 #pragma warning restore 612, 618
         }

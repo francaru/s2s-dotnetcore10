@@ -1,8 +1,8 @@
 ﻿using Database;
 using Database.Entities;
 using Messaging;
-using Messaging.LifecycleEvents;
-using Messaging.WorkEvents;
+using Messaging.JobLifecyleEvents;
+using OperationalService.BusinessLogic.Exceptions;
 using OperationalService.BusinessLogic.Objects;
 using System.Diagnostics;
 
@@ -96,12 +96,17 @@ public class JobsService(DatabaseContext dbContext, IMessageHandler messageHandl
         // Start a new tracing activity.
         using var _ = Activity.Current!.Source.StartActivity("StartJob");
 
+        // Get the next idle worker.
+        var workersService = new WorkersService(dbContext, messageHandler);
+        var worker = workersService.GetNextIdleWorker() ?? throw new NoWorkersAvailableException();
+
         // Create a new job database entity.
         var jobId = Guid.NewGuid();
         var jobEntity = new JobEntity()
         {
             Id = jobId,
             Name = job.Name,
+            WorkerId = worker.Id,
             JobInfo = new JobInfoEntity()
             {
                 JobId = jobId,

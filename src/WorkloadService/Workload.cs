@@ -1,7 +1,7 @@
 ﻿using CommandLine;
 using Messaging;
-using Messaging.LifecycleEvents;
-using Messaging.WorkEvents;
+using Messaging.JobLifecyleEvents;
+using Messaging.WorkerLifecycleEvents;
 
 namespace WorkloadService;
 
@@ -10,11 +10,6 @@ namespace WorkloadService;
 /// </summary>
 public class Workload
 {
-    /// <summary>
-    /// The name of the service.
-    /// </summary>
-    const string serviceName = "WorkloadService";
-
     /// <summary>
     /// Job execution logic (simulation only includes a 10s delay).
     /// </summary>
@@ -59,7 +54,10 @@ public class Workload
     /// </summary>
     class Options
     {
-        [Option("rabbitmq-host", HelpText = "Host where to connect to RabbitMQ", Default = "localhost")]
+        [Option("service-name", HelpText = "The name of the service.", Required = true)]
+        public required string ServiceName { get; set; }
+
+        [Option("rabbitmq-host", HelpText = "Host where to connect to RabbitMQ.", Default = "localhost")]
         public required string RabbitMQHost { get; set; }
     }
 
@@ -74,8 +72,17 @@ public class Workload
 
         // A message handler instance is created using the information from the provided options.
         using var mqClient = MQClient
-            .Connect(hostName: options.RabbitMQHost, serviceName: serviceName)
+            .Connect(hostName: options.RabbitMQHost, serviceName: options.ServiceName)
             .Subscribe();
+
+        // Inform the listening consumer that this service is now ready to accept requests.
+        mqClient.Produce(
+            toQueues: ["OperationalService.BusinessLogic.Service.WorkersService::OnWorkerStart"],
+            new WorkerStartEventBody() 
+            { 
+                WorkerName = options.ServiceName 
+            }
+        );
 
         // The application is kept alive indefinitely, until manual exit.
         await Task.Delay(Timeout.Infinite);

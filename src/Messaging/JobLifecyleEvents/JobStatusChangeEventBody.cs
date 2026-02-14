@@ -1,4 +1,4 @@
-﻿namespace Messaging.LifecycleEvents;
+﻿namespace Messaging.JobLifecyleEvents;
 
 /// <summary>
 /// Describes an event where the status of a job has changed.

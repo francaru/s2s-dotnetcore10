@@ -5,6 +5,8 @@ using OperationalService.BusinessLogic.Objects;
 using OperationalService.BusinessLogic.Services;
 using System.ComponentModel;
 using Messaging;
+using OperationalService.BusinessLogic.Exceptions;
+using OperationalService.Api.Schemas.Errors;
 
 namespace OperationalService.Api.Controllers;
 
@@ -106,13 +108,27 @@ public class JobsController(DatabaseContext dbContext, IMessageHandler messageHa
     /// <returns>An action result with the created job.</returns>
     [HttpPost]
     [Produces<Job>]
+    [ProducesResponseType(typeof(ConflictError), 409)]
     public IActionResult Create(JobCreate jobCreate)
     {
         /// 1. Create a jobs service.
         /// 2. Start a new job.
         var jobObject = new JobServiceObject() { Name = jobCreate.Name };
         var jobsService = new JobsService(dbContext: dbContext, messageHandler: messageHandler);
-        jobObject = jobsService.StartJob(jobObject);
+
+        try
+        {
+            jobObject = jobsService.StartJob(jobObject);
+        }
+        catch (NoWorkersAvailableException)
+        {
+            return Conflict(
+                new ConflictError() { 
+                    ErrorCode = "NO_WORKERS_AVAILABLE", 
+                    Message = "No workers are currently available to handle this job. Try to create a new worker, or wait until one becomes available."
+                }
+            );
+        }
 
         // Construct the response.
         return Created(

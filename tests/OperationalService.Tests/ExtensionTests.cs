@@ -1,6 +1,6 @@
 ﻿using Database;
 using Messaging;
-using Messaging.LifecycleEvents;
+using Messaging.JobLifecyleEvents;
 using Microsoft.Extensions.Logging;
 using Moq;
 using System.Diagnostics;
